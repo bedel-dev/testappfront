@@ -5,9 +5,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class RechargementService {
-  constructor(private http: HttpClient) { }
+constructor(private http: HttpClient) { }
 
-  
+
 
 
 
