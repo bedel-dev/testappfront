@@ -1,0 +1,194 @@
+<div class="container py-5">
+  <div class="row mb-4">
+      <div class="col-lg-8 mx-auto text-center">
+        <div>
+          <img class="image" src="https://paymetrust.net/images/brand/logo.png" alt="">
+        </div>
+          <br>
+          <div>
+            <h3 class="tooltip-text" id="top">Recharger votre
+              <strong style="text-transform: uppercase;" >PaymWallet</strong>
+              <span>
+                <img
+                class="card-toolbar"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-trigger="hover"
+                title="Ce compte est certifié"
+                style="width: 2.4%;margin-left: 6px;margin-bottom: 2px;" src="assets/img/valide.png" alt="">
+            </span>
+            <p>
+              Comme vous voulez
+            </p>
+            </h3>
+          </div>
+      </div>
+
+  </div> 
+  <div class="row">
+      <div class="col-lg-6 mx-auto appcard">
+          <div  *ngIf="choixModePaiement=='false'"  class="cards">
+            <div class="card-header">
+                <!-- End -->
+                <!-- Credit card form content -->
+                <div class="tab-content">
+                    <!-- credit card info-->
+                    <div id="credit-card" class="tab-pane fade show active pt-3">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group lab">
+                                        <button  (click)="choiceModePaiement('moov')"    class=" ">
+                                            <img class="operator" src="assets/img/moov.png" alt="moov">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                  <div class="form-group lab">
+                                    <button (click)="choiceModePaiement('mtn')" class=" " >
+                                      <img class="operator" src="assets/img/mtn.jpeg" alt="mtn">
+                                    </button>
+                                  </div>
+                              </div>
+                              <div class="col-sm-4">
+                                <div class="form-group lab">
+                                  <button (click)="choiceModePaiement('wave')" class=" " >
+                                    <img class="operator" src="assets/img/wave.png" alt="wave">
+                                </button>
+                                </div>
+                              </div>
+                              <div class="col-sm-4">
+                                <div class="form-group lab">
+                                  <button (click)="choiceModePaiement('orange')"  class=" " >
+                                    <img class="operator" src="assets/img/orange.jpeg" alt="orange">
+                                </button>
+                                </div>
+                              </div>
+                            </div>
+                    </div>
+                </div>
+                <!-- End -->
+            </div>
+        </div>
+        <div  *ngIf="choixModePaiement=='true'"  class="card">
+          <div class="card-header">
+              <!-- End -->
+              <!-- Credit card form content -->
+              <div
+              style="
+              left: 105%!important;
+              bottom: 45px!important;
+              position: relative!important;
+              background:rgb(56 125 255)!important;
+              color: #fff!important;
+              border-radius: 0.5rem;
+              right: 0%;
+              width: 5%;
+              height: 5%;">
+                <button
+                (click)="choiceModePaiement('retour')"
+                style="font-size: 25px;
+                color:#fff;
+                margin-left: 4.2px;">
+
+                  <i class="fas fa-times"
+                  aria-hidden="true">
+                </i>
+                </button>
+              </div>
+              <div class="tab-content">
+                  <!-- credit card info-->
+                  <div id="credit-card" class="tab-pane fade show active pt-3">
+                      <form role="form" [formGroup]="FormOperator" >
+                          <div class="form-group lab">
+                              <label for="username">
+                                  <h6>Changez l'operateur</h6>
+                              </label>
+                              <select (change)="changeOperator($event.target)" formControlName="operator" name="username" placeholder="Montant à payer" required class="form-control">
+                                <option   value="orange">ORANGE CI</option>
+                                <option   value="mtn">MTN CI</option>
+                                <option   value="moov">Moov CI</option>
+                                <option   value="wave">Wave CI</option>
+                              </select>
+                              </div>
+                              <div class="bilan">
+                                <div class="row">
+                                  <div class="form-group lab">
+                                    <div class="input-groups">
+                                      <ngx-intl-tel-input  tel-input
+                                      (input)="listenInput($event.target,'contact')"
+                                      [cssClass]="'form-control'" 
+                                      [phoneValidation]="true"
+                                      [onlyCountries]="['ci']"
+                                      [selectedCountryISO]="selectedCountryISO"
+                                      [preferredCountries]="preferredCountries"
+                                      customPlaceholder = "Entrez votre numero"
+                                      [numberFormat]="PhoneNumberFormat.National"
+                                      [enableAutoCountrySelect]="false" 
+                                      [enablePlaceholder]="true"
+                                      [searchCountryFlag]="true"
+                                      formControlName="contact_operation"
+                                      [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                                      class="s"
+                                       required>
+                                      </ngx-intl-tel-input>
+                                    </div>
+                                    <div   *ngIf="error_tel"  style="color: red;">
+                                      Entrez un numero de telephone
+                                    </div>
+                                    <div *ngIf="error_tel_mtn" style="color: red;" >
+                                      Entrez un numero de MTN
+                                    </div>
+                                </div>
+                                <div  class="form-group lab">
+                                 <input
+                                 class="s"  
+
+                                 (input)="listenInput($event.target,'amount')" formControlName="amount" placeholder="Montant à recharger" required class="form-control"
+                                  type="number">
+                                </div>
+                                  <div class="col-sm-6">
+                                      <div class="form-group lab">
+                                        <img *ngIf="choixOperator =='mtn'"  style="width: 75px;border-radius: 10px;"  src="assets/img/mtn.jpeg" alt="mtn">
+                                        <img *ngIf="choixOperator =='moov'" style="width: 75px;border-radius: 10px;"  src="assets/img/moov.png" alt="moov">
+                                        <img  *ngIf="choixOperator =='wave'" style="width: 75px;border-radius: 10px;"  src="assets/img/wave.png" alt="wave">
+                                        <img  *ngIf="choixOperator =='orange'" style="width: 75px;border-radius: 10px;"  src="assets/img/orange.jpeg" alt="orange"> 
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="info_paie">
+                                      <span style="font-size: 17px;    padding-bottom: 4px;">+225 {{clientNumber}}</span>
+                                      <span  style="font-size: 25px;    padding-bottom: 4px;font-weight: 600;letter-spacing: 1.2px;" >{{amount|number:'1.0-0'}} F CFA</span>
+                                    </div>
+                                </div>
+                               </div> 
+                      </div>
+                          <div style="position: relative;top: 8px;" class="card-footer">
+                            <a
+                            type="button"
+                            
+                            style="
+                            background-color: rgb(56 125 255);
+                            border: rgb(56 125 255);
+                            "
+                             class="subscribe btn btn-primary btn-block shadow-sm">
+                             <ng-container *ngIf="isLoading">
+                              <span class="indicator-progress" [style.display]="'block'">
+                                Patientez {{ " " }}
+                                <span
+                                  class="spinner-border spinner-border-sm align-middle ms-2"
+                                ></span>
+                              </span>
+                            </ng-container>
+                              <ng-container *ngIf="!isLoading">
+                                Recharger
+                              </ng-container>
+                            </a>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+              <!-- End -->
+          </div>
+      </div>
+      </div>
+  </div>
