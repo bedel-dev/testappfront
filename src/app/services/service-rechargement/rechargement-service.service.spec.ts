@@ -12,6 +12,7 @@ describe('RechargementService', () => {
       imports: [RouterTestingModule, HttpClientTestingModule],
     });
     service = TestBed.inject(RechargementService);
+    
   });
 
   it('service should be created', () => {
@@ -20,11 +21,5 @@ describe('RechargementService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
-  });
-
-
-  it(`should have` , () => {
-    const fixture = TestBed.inject(RechargementService);
-
   });
 });

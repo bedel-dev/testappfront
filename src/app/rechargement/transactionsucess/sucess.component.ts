@@ -9,10 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 export class SucessComponent implements OnInit {
 
   constructor(private router: ActivatedRoute) { }
-  route= "";
 
   ngOnInit(): void {
-   this.route = this.router.snapshot.params['id'];
   }
 
 }

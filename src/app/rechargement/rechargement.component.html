@@ -37,28 +37,28 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group lab">
-                                        <button  (click)="choiceModePaiement('moov')"    class=" ">
+                                        <button  (click)="choiceModePaiement('MOOV_CI')"    class=" ">
                                             <img class="operator" src="assets/img/moov.png" alt="moov">
                                         </button>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                   <div class="form-group lab">
-                                    <button (click)="choiceModePaiement('mtn')" class=" " >
+                                    <button (click)="choiceModePaiement('MTN_CI')" class=" " >
                                       <img class="operator" src="assets/img/mtn.jpeg" alt="mtn">
                                     </button>
                                   </div>
                               </div>
                               <div class="col-sm-4">
                                 <div class="form-group lab">
-                                  <button (click)="choiceModePaiement('wave')" class=" " >
+                                  <button (click)="choiceModePaiement('WAVE_CI')" class=" " >
                                     <img class="operator" src="assets/img/wave.png" alt="wave">
                                 </button>
                                 </div>
                               </div>
                               <div class="col-sm-4">
                                 <div class="form-group lab">
-                                  <button (click)="choiceModePaiement('orange')"  class=" " >
+                                  <button (click)="choiceModePaiement('OM_CI')"  class=" " >
                                     <img class="operator" src="assets/img/orange.jpeg" alt="orange">
                                 </button>
                                 </div>
@@ -98,16 +98,16 @@
               <div class="tab-content">
                   <!-- credit card info-->
                   <div id="credit-card" class="tab-pane fade show active pt-3">
-                      <form role="form" [formGroup]="FormOperator" >
+                      <form role="form" [formGroup]="FormOperator">
                           <div class="form-group lab">
                               <label for="username">
                                   <h6>Changez l'operateur</h6>
                               </label>
                               <select (change)="changeOperator($event.target)" formControlName="operator" name="username" placeholder="Montant à payer" required class="form-control">
-                                <option   value="orange">ORANGE CI</option>
-                                <option   value="mtn">MTN CI</option>
-                                <option   value="moov">Moov CI</option>
-                                <option   value="wave">Wave CI</option>
+                                <option   value="OM_CI">ORANGE CI</option>
+                                <option   value="MTN_CI">MTN CI</option>
+                                <option   value="MOOV_CI">MOOV CI</option>
+                                <option   value="WAVE_CI">WAVE CI</option>
                               </select>
                               </div>
                               <div class="bilan">
@@ -132,12 +132,6 @@
                                        required>
                                       </ngx-intl-tel-input>
                                     </div>
-                                    <div   *ngIf="error_tel"  style="color: red;">
-                                      Entrez un numero de telephone
-                                    </div>
-                                    <div *ngIf="error_tel_mtn" style="color: red;" >
-                                      Entrez un numero de MTN
-                                    </div>
                                 </div>
                                 <div  class="form-group lab">
                                  <input
@@ -145,13 +139,16 @@
 
                                  (input)="listenInput($event.target,'amount')" formControlName="amount" placeholder="Montant à recharger" required class="form-control"
                                   type="number">
+                                  <div   *ngIf="error_tel"  style="color: red;">
+                                   Remplissez tout les champs svp
+                                  </div>
                                 </div>
                                   <div class="col-sm-6">
                                       <div class="form-group lab">
-                                        <img *ngIf="choixOperator =='mtn'"  style="width: 75px;border-radius: 10px;"  src="assets/img/mtn.jpeg" alt="mtn">
-                                        <img *ngIf="choixOperator =='moov'" style="width: 75px;border-radius: 10px;"  src="assets/img/moov.png" alt="moov">
-                                        <img  *ngIf="choixOperator =='wave'" style="width: 75px;border-radius: 10px;"  src="assets/img/wave.png" alt="wave">
-                                        <img  *ngIf="choixOperator =='orange'" style="width: 75px;border-radius: 10px;"  src="assets/img/orange.jpeg" alt="orange"> 
+                                        <img *ngIf="choixOperator =='MTN_CI'"  style="width: 75px;border-radius: 10px;"  src="assets/img/mtn.jpeg" alt="mtn">
+                                        <img *ngIf="choixOperator =='MOOV_CI'" style="width: 75px;border-radius: 10px;"  src="assets/img/moov.png" alt="moov">
+                                        <img  *ngIf="choixOperator =='WAVE_CI'" style="width: 75px;border-radius: 10px;"  src="assets/img/wave.png" alt="wave">
+                                        <img  *ngIf="choixOperator =='OM_CI'" style="width: 75px;border-radius: 10px;"  src="assets/img/orange.jpeg" alt="orange"> 
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
@@ -170,6 +167,7 @@
                             background-color: rgb(56 125 255);
                             border: rgb(56 125 255);
                             "
+                            (click)="DoRechargment()"
                              class="subscribe btn btn-primary btn-block shadow-sm">
                              <ng-container *ngIf="isLoading">
                               <span class="indicator-progress" [style.display]="'block'">
